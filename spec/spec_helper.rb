@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require "movie_rental/statement.rb"
+require "movie_rental/movie_rental_spec.rb"
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure
