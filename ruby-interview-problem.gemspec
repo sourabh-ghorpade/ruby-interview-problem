@@ -1,10 +1,8 @@
 # frozen_string_literal: true
 
-require_relative "lib/movie_rental/version"
-
 Gem::Specification.new do |spec|
   spec.name          = "ruby-interview-problem"
-  spec.version       = MovieRental::VERSION
+  spec.version       = 1.0
   spec.authors       = ["Sourabh Ghorpade"]
   spec.email         = ["sourabh.ghorpade@gmail.com"]
 
