@@ -8,14 +8,16 @@ customer=
   name: "martin",
   rentals: [
     { movie_id: "F001", days: 3 },
-    { movie_id: "F002", days: 1 }
+    { movie_id: "F002", days: 1 },
+    { movie_id: "F003", days: 4 },
   ]
 }
 
 movies=
 {
   "F001" => { title: "Ran",                     code: "regular" },
-  "F002" => { title: "Trois Couleurs: Bleu",     code: "regular" }
+  "F002" => { title: "Trois Couleurs: Bleu",     code: "regular" },
+  "F003" => { title: "Trois Couleurs: Red",     code: "new" }
 }
 
 # Expected output
@@ -34,11 +36,6 @@ module MovieRental
       this_amount = MovieRental.calculate_movie_amount(movie, this_amount, rental)
 
       this_amount, frequent_renter_points = MovieRental.calculate_frequent_renter_points(movie, frequent_renter_points, this_amount, rental)
-
-      # frequent_renter_points += 1
-      # if movie[:code] == "new" && rental[:days] > 2
-      #   frequent_renter_points += 1
-      # end
 
       result += "\t#{movie[:title]}\t#{this_amount}\n"
       total_amount += this_amount
@@ -69,7 +66,7 @@ module MovieRental
     this_amount
   end
 
-  def self.calculate_frequent_renter_points(movie, frequent_renter_points, this_amount, rental )
+  def self.calculate_frequent_renter_points(movie, frequent_renter_points, this_amount, rental)
     frequent_renter_points += 1
     if movie[:code] == "new" && rental[:days] > 2
       frequent_renter_points += 1
