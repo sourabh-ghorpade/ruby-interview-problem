@@ -24,6 +24,7 @@ GEM
 
 PLATFORMS
   arm64-darwin-20
+  universal-darwin-22
   x86_64-linux
 
 DEPENDENCIES
@@ -32,4 +33,4 @@ DEPENDENCIES
   ruby-interview-problem!
 
 BUNDLED WITH
-   2.2.3
+   2.3.4
