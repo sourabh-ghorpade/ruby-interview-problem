@@ -33,10 +33,12 @@ module MovieRental
 
       this_amount = MovieRental.calculate_movie_amount(movie, this_amount, rental)
 
-      frequent_renter_points += 1
-      if movie[:code] == "new" && rental[:days] > 2
-        frequent_renter_points += 1
-      end
+      this_amount, frequent_renter_points = MovieRental.calculate_frequent_renter_points(movie, frequent_renter_points, this_amount, rental)
+
+      # frequent_renter_points += 1
+      # if movie[:code] == "new" && rental[:days] > 2
+      #   frequent_renter_points += 1
+      # end
 
       result += "\t#{movie[:title]}\t#{this_amount}\n"
       total_amount += this_amount
@@ -65,6 +67,15 @@ module MovieRental
     end
 
     this_amount
+  end
+
+  def self.calculate_frequent_renter_points(movie, frequent_renter_points, this_amount, rental )
+    frequent_renter_points += 1
+    if movie[:code] == "new" && rental[:days] > 2
+      frequent_renter_points += 1
+    end
+
+    return this_amount, frequent_renter_points
   end
 end
 
