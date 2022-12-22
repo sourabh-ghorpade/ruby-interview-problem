@@ -27,29 +27,14 @@ module MovieRental
     frequent_renter_points = 0
     result = "Rental Record for #{customer[:name]}\n"
 
-    customer[:rentals].each do |r|
-      movie = movies[r[:movie_id]]
+    customer[:rentals].each do |rental|
+      movie = movies[rental[:movie_id]]
       this_amount = 0
 
-      this_amount = MovieRental.calculate_movie_amount(movie, this_amount, r)
-
-      # case movie[:code]
-      # when "regular"
-      #   this_amount = 2
-      #   if r[:days] > 2
-      #     this_amount += (r[:days] - 2) * 1.5
-      #   end
-      # when "new"
-      #   this_amount = r[:days] * 3
-      # when "childrens"
-      #   this_amount = 1.5
-      #   if r[:days] > 3
-      #     this_amount += (r[:days] - 3) * 1.5
-      #   end
-      # end
+      this_amount = MovieRental.calculate_movie_amount(movie, this_amount, rental)
 
       frequent_renter_points += 1
-      if movie[:code] == "new" && r[:days] > 2
+      if movie[:code] == "new" && rental[:days] > 2
         frequent_renter_points += 1
       end
 
@@ -63,19 +48,19 @@ module MovieRental
     result
   end
 
-  def self.calculate_movie_amount(movie, this_amount, r)
+  def self.calculate_movie_amount(movie, this_amount, rental)
     case movie[:code]
     when "regular"
       this_amount = 2
-      if r[:days] > 2
-        this_amount += (r[:days] - 2) * 1.5
+      if rental[:days] > 2
+        this_amount += (rental[:days] - 2) * 1.5
       end
     when "new"
-      this_amount = r[:days] * 3
+      this_amount = rental[:days] * 3
     when "childrens"
       this_amount = 1.5
-      if r[:days] > 3
-        this_amount += (r[:days] - 3) * 1.5
+      if rental[:days] > 3
+        this_amount += (rental[:days] - 3) * 1.5
       end
     end
 
